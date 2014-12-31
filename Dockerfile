@@ -2,10 +2,8 @@ FROM ubuntu:latest
 MAINTAINER "Tim Fall" <tim@midokura.com>
 
 RUN apt-get update
-RUN apt-get -y install openvpn
+RUN apt-get -y install wget openssl openvpn
 
-ADD openvpn.cfg /tmp/openvpn.cfg
+ADD *.openvpn /etc/openvpn/
 
-RUN unzip /tmp/openvpn.cfg /tmp/
-
-ENTRYPOINT ['openvpn','--config /tmp/openvpn.cfg']
+ENTRYPOINT ["/usr/sbin/openvpn"]
